@@ -16,6 +16,6 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 //endpoint
 router.post("/product", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    return res.status(201).json({});
+    return res.status(201).json({ msg: "Xx" });
 }));
 exports.default = router;
