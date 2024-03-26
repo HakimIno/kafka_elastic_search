@@ -1,34 +1,29 @@
 import { ICatalogRepository } from "../interface/catalogRepository.interface";
 
 export class CatalogService {
-    private _repository: ICatalogRepository;
-    constructor(repository: ICatalogRepository) {
-        this._repository = repository;
-    }
+    constructor(private _repository: ICatalogRepository) { }
 
     async createProduct(input: any) {
         const data = await this._repository.create(input);
-        if (!data.id) {
-            throw new Error("unable to create product");
-        }
+        if (!data.id) throw new Error("unable to create product");
         return data;
     }
 
-    updateProduct(input: any) {
-
+    async updateProduct(input: any) {
+        const data = await this._repository.update(input);
+        if (!data.id) throw new Error("unable to update product");
+        return data;
     }
 
-    getProducts(limit: number, offset: number) {
-
+    async getProducts(limit: number, offset: number) {
+        return this._repository.find(limit, offset);
     }
 
-    getProduct(id: number) {
-
+    async getProduct(id: number) {
+        return this._repository.findOne(id);
     }
 
-    deleteProduct(id: number) {
-
+    async deleteProduct(id: number) {
+        return this._repository.delete(id);
     }
-
-
 }
